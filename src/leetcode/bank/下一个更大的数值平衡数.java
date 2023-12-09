@@ -14,6 +14,7 @@ public class 下一个更大的数值平衡数 {
         return -1;
     }
 
+    //题设条件
     private static boolean isBalance(int x) {
         int[] count = new int[10];
         while (x > 0) {
