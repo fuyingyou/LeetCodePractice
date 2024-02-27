@@ -16,19 +16,20 @@ public class 随机链表的复制 {
             this.random = null;
         }
     }
-    public Node copyRandomList(Node head) {
-        if (head == null) {
-            return head;
-        }
 
-
-        var map = new HashMap<Integer, Node>();
-        Node root = new Node(head.val);
-        Node resNode = new Node(1);
-        resNode.next = root;
-        if (map.containsKey(head.random)) {
-
-        return resNode.next;
-    }
+//    public Node copyRandomList(Node head) {
+//        if (head == null) {
+//            return head;
+//        }
+//
+//
+//        var map = new HashMap<Integer, Node>();
+//        Node root = new Node(head.val);
+//        Node resNode = new Node(1);
+//        resNode.next = root;
+//        if (map.containsKey(head.random)) {
+//            return resNode.next;
+//        }
+//    }
 }
 
