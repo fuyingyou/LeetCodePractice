@@ -80,14 +80,35 @@ public class Top100 {
         }
         if (n + m == 2) {
             if (n == 0) {
-                return (nums2[0] + nums2[1]) / 2;
+                return (double) (nums2[0] + nums2[1]) / 2;
             } else if (m == 0) {
-                return (nums1[0] + nums1[1]) / 2;
+                return (double) (nums1[0] + nums1[1]) / 2;
             } else {
-                return (nums2[0] + nums2[0]) / 2;
+                return (double) (nums2[0] + nums2[0]) / 2;
+            }
+        }
+
+        int left1 = 0, right1 = n - 1;
+        int left2 = 0, right2 = m - 1;
+        while (right2 - left2 + 1 + right1 - left1 + 1 > 2) {
+            if (left1 < left2) {
+                left1++;
+            } else {
+                left2++;
+            }
+
+            if (right1 > right2) {
+                right1--;
+            } else {
+                right2--;
             }
         }
 
         return 0;
     }
+
+    // 5. 最长回文子串
+//    public String longestPalindrome(String s) {
+//
+//    }
 }
