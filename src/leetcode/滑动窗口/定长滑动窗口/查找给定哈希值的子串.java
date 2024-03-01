@@ -1,6 +1,17 @@
 package leetcode.滑动窗口.定长滑动窗口;
 
 public class 查找给定哈希值的子串 {
+
+    /**
+     * 从左向右时，需要除以power, 因为已经取余，所以除以power不一定余数为0
+     * 从右向左时，需要取出最大的那个数，可以直接去掉取余后的结果，然后整体 * power,还可以使用秦九韶算法
+     * @param s
+     * @param power
+     * @param modulo
+     * @param k
+     * @param hashValue
+     * @return
+     */
     public String subStrHash(String s, int power, int modulo, int k, int hashValue) {
         int n = s.length();
         char[] charArray = s.toCharArray();

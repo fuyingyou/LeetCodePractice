@@ -1,6 +1,12 @@
 package leetcode.滑动窗口.定长滑动窗口;
 
 public class 最少交换次数来组合所有的12 {
+    /**
+     *  数字1的总数是确定的cnt，最后所有的1需要在一个长为cnt的窗口中
+     *  先得到数字1的数量，然后滑动这个大小的窗口，记录窗口内数字1最多出现了几次，不在这个窗口内的数字1就是需要交换过来的。
+     * @param nums
+     * @return
+     */
     public int minSwaps(int[] nums) {
         int n = nums.length;
         int cnt = 0;

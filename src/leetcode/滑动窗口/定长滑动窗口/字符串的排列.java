@@ -1,6 +1,15 @@
 package leetcode.滑动窗口.定长滑动窗口;
 
 public class 字符串的排列 {
+    /**
+     * 给你两个字符串 s1 和 s2 ，写一个函数来判断 s2 是否包含 s1 的排列。如果是，返回 true ；否则，返回 false 。
+     * 换句话说，s1 的排列之一是 s2 的 子串 。
+     *
+     * 用字典记录字符串每个字符出现的个数，如果s2的某个窗口恰好包含这个字典，认为s1是s2的子串
+     * @param s1
+     * @param s2
+     * @return
+     */
     public boolean checkInclusion(String s1, String s2) {
         int n = s1.length();
         int m = s2.length();

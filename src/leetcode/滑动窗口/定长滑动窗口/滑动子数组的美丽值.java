@@ -1,6 +1,16 @@
 package leetcode.滑动窗口.定长滑动窗口;
 
 public class 滑动子数组的美丽值 {
+    /**
+     * /**
+     *  题目范围显示num的值为【-50， 50】，可以建立dic记录此窗口内的每种负数的个数，同时记录此窗口内的所有负数的个数和
+     *  if 负数个数总和 < x ： 0
+     *  if 小于负数Y的负数个数 < k, 小于等于负数Y的负数个数 >=k ： Y
+     * @param nums
+     * @param k
+     * @param x
+     * @return
+     */
     public int[] getSubarrayBeauty(int[] nums, int k, int x) {
         int n = nums.length;
         int[] res = new int[n - k + 1];

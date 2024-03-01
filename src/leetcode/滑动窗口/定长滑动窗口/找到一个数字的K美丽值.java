@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Collections;
 
 public class 找到一个数字的K美丽值 {
+
     public int divisorSubstrings(int num, int k) {
         int[] arr = numToArray(num);
         int n = arr.length;
