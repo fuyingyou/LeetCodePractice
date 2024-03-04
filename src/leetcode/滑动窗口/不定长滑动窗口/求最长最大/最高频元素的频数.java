@@ -7,9 +7,9 @@ public class 最高频元素的频数 {
         Arrays.sort(nums);
         int n = nums.length;
         int ans = 1;
-        int cnt = 0;
+        long cnt = 0;
         for (int left = 0, right = 1; right < n; right++) {
-            cnt += (right - left) * (nums[right] - nums[right - 1]);
+            cnt += (long)(right - left) * (nums[right] - nums[right - 1]);
             while (cnt > k) {
                 cnt -= nums[right] - nums[left];
                 left++;
