@@ -1,4 +1,4 @@
-package leetcode.二分算法.二分答案;
+package leetcode.二分.二分答案;
 
 public class 在D天内送达包裹的能力 {
     public int shipWithinDays(int[] weights, int days) {

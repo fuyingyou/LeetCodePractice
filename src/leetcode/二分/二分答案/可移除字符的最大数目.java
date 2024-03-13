@@ -1,4 +1,4 @@
-package leetcode.二分算法.二分答案;
+package leetcode.二分.二分答案;
 
 public class 可移除字符的最大数目 {
     public int maximumRemovals(String s, String p, int[] removable) {

@@ -1,4 +1,4 @@
-package leetcode.template;
+package template;
 
 public class MatrixSum {
     private int[][] sum;
