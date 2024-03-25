@@ -44,29 +44,81 @@ public class week390 {
         return right;
     }
 
-    public long[] mostFrequentIDs(int[] nums, int[] freq) {
-        int n = nums.length;
-        TreeMap<Long, Integer> count = new TreeMap<>(Collections.reverseOrder());
-        count.put(0L, 1000000);
-
+    public long[] mostFrequentIDs1(int[] nums, int[] freq) {
         HashMap<Integer, Long> map = new HashMap<>();
+        TreeMap<Long, Integer> treeMap = new TreeMap<>(Collections.reverseOrder());
+        int n = nums.length;
+        long[] ans = new long[n];
+        for (int i = 0; i < n; i++) {
+            long pre = map.getOrDefault(nums[i], 0L);
+            long cur = pre + freq[i];
+            if (cur == 0) {
+                map.remove(nums[i]);
+            } else {
+                map.put(nums[i], cur);
+            }
 
-        long[] res = new long[n];
-
-        for(int i = 0; i < n; i++){
-            int id = nums[i];
-            long before = map.getOrDefault(id, 0L);
-            long cur = before + freq[i];
-
-            count.compute(before, (k, v) -> v == 1 ? null : v - 1);
-            count.compute(cur, (k, v) -> v == null ? 1 : v + 1);
-
-            map.put(id, cur);
-
-            res[i] = count.firstKey();
+            if (treeMap.containsKey(pre)) {
+                int val = treeMap.get(pre);
+                if (val == 1) {
+                    treeMap.remove(pre);
+                } else {
+                    treeMap.put(pre, val - 1);
+                }
+            }
+            treeMap.put(cur, treeMap.getOrDefault(cur, 0) + 1);
+            ans[i] = treeMap.firstKey();
         }
-
-
-        return res;
+        return ans;
     }
+
+    public int[] stringIndices(String[] wordsContainer, String[] wordsQuery) {
+        Node root = new Node();
+        int n = wordsContainer.length;
+
+        // 构建字典树
+        for (int i = 0; i < n; i++) {
+            Node cur = root;
+            int len = wordsContainer[i].length();
+            if (len < cur.minL) {
+                cur.minL = len;
+                cur.i = i;
+            }
+            char[] charArray = wordsContainer[i].toCharArray();
+            for (int j = len - 1; j >= 0; j--) {
+                int x = charArray[j] - 'a';
+                if (cur.son[x] == null) {
+                    cur.son[x] = new Node();
+                }
+                cur = cur.son[x];
+                if (len < cur.minL)  {
+                    cur.minL = len;
+                    cur.i = i;
+                }
+            }
+        }
+        int m = wordsQuery.length;
+        int[] ans = new int[m];
+        for (int i = 0; i < m; i++) {
+            Node cur = root;
+            int l = wordsQuery[i].length();
+            char[] charArray = wordsQuery[i].toCharArray();
+            for (int j = l - 1; j >= 0; j--) {
+                if (cur.son[charArray[j] - 'a'] != null) {
+                    cur = cur.son[charArray[j] - 'a'];
+                } else {
+                    break;
+                }
+            }
+            ans[i] = cur.i;
+        }
+        return ans;
+    }
+}
+
+// 字典树节点
+class Node{
+    Node[] son = new Node[26];
+    int minL = Integer.MAX_VALUE;
+    int i;
 }
