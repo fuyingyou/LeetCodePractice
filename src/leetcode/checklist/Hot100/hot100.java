@@ -301,4 +301,105 @@ public class hot100 {
         }
         return ans;
     }
+
+
+    // 53. 最大子数组和
+    public int maxSubArray(int[] nums) {
+        if (nums.length == 0) {
+            return 0;
+        }
+        int mx = nums[0];
+        int sum = nums[0];
+        for (int i = 1; i < nums.length; i++) {
+            if (sum < 0) {
+                sum = nums[i];
+            } else {
+                sum += nums[i];
+            }
+            mx = Math.max(mx, sum);
+        }
+        return mx;
+    }
+
+    // 56. 合并区间
+    public int[][] merge(int[][] intervals) {
+        Arrays.sort(intervals, (a, b) -> a[0] - b[0]);
+        List<int[]> ans = new ArrayList<>();
+        for (int[] interval : intervals) {
+            if (ans.size() == 0) {
+                ans.add(interval);
+            } else {
+                int temp = ans.get(ans.size() - 1)[1];
+                if (temp >= interval[0]) {
+                    temp = Math.max(temp, interval[1]);
+                    ans.get(ans.size() - 1)[1] = temp;
+                } else {
+                    ans.add(interval);
+                }
+            }
+        }
+        int[][] res = new int[ans.size()][2];
+        for (int i = 0; i < ans.size(); i++) {
+            res[i] = ans.get(i);
+        }
+        return res;
+    }
+
+    // 189. 轮转数组
+    public void rotate(int[] nums, int k) {
+        k %= nums.length;
+        reverse(nums, 0, nums.length - 1);
+        reverse(nums, 0, k - 1);
+        reverse(nums, k, nums.length - 1);
+    }
+
+    private void reverse(int[] nums, int start, int end) {
+        while (start < end) {
+            int temp = nums[start];
+            nums[start] = nums[end];
+            nums[end] = temp;
+            start++;
+            end--;
+        }
+    }
+
+    // 238. 除自身以外数组的乘积
+    public int[] productExceptSelf(int[] nums) {
+        int n = nums.length;
+        int[] res = new int[n];
+        int[] pre = new int[n + 1];
+        int[] end = new int[n + 1];
+        pre[0] = 1;
+        end[n] = 1;
+        for (int i = 0; i < n; i++) {
+            pre[i + 1] = pre[i] * nums[i];
+        }
+        for (int i = n - 1; i >= 0; i--) {
+            end[i] = end[i + 1] * nums[i];
+        }
+        for (int i = 0; i < n; i++) {
+            res[i] = pre[i] * end[i + 1];
+        }
+        return res;
+    }
+
+    // 41. 缺失的第一个正数
+    public int firstMissingPositive(int[] nums) {
+        for (int i = 0; i < nums.length; i++) {
+            while (nums[i] > 0 && nums[i] <= nums.length && nums[nums[i] - 1] != nums[i]) {
+                swap(nums, i, nums[i] - 1);
+            }
+        }
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] != i + 1) {
+                return i + 1;
+            }
+        }
+        return nums.length + 1;
+    }
+    private void swap(int[] nums, int i, int j) {
+        int temp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = temp;
+    }
 }
