@@ -84,7 +84,7 @@ public class hot100 {
         for (int i = 0; i < nums.length; i++) {
             if (nums[i] == 0) {
                 cnt++;
-            } else if (cnt > 0){
+            } else if (cnt > 0) {
                 nums[i - cnt] = nums[i];
             }
         }
@@ -160,5 +160,145 @@ public class hot100 {
             sum += Math.max(0, Math.min(pre[i + 1], end[i]) - height[i]);
         }
         return sum;
+    }
+
+    // 3. 无重复字符的最长子串
+    public int lengthOfLongestSubstring(String s) {
+        int[] dic = new int[260];
+        char[] charArray = s.toCharArray();
+        int mx = 0, left = 0;
+        for (int i = 0; i < charArray.length; i++) {
+            dic[charArray[i]]++;
+            while (dic[charArray[i]] > 1) {
+                dic[charArray[left]]--;
+                left++;
+            }
+            mx = Math.max(mx, i - left + 1);
+        }
+        return mx;
+    }
+
+    // 438. 找到字符串中所有字母异位词 todo 1
+    public List<Integer> findAnagrams(String s, String p) {
+        List<Integer> ans = new ArrayList<>();
+        char[] sCharArray = s.toCharArray();
+        char[] tCharArray = p.toCharArray();
+        int[] need = new int[26];
+        int[] window = new int[26];
+        for (char c : tCharArray) {
+            need[c - 'a']++;
+        }
+        int valid = 0;
+        for (int i = 0; i < 26; i++) {
+            if (need[i] != 0) {
+                valid++;
+            }
+        }
+        int left = 0, right = 0;
+        while (right < sCharArray.length) {
+            if (need[sCharArray[right] - 'a'] != 0) {
+                window[sCharArray[right] - 'a']++;
+                if (window[sCharArray[right] - 'a'] == need[sCharArray[right] - 'a']) {
+                    valid--;
+                }
+            }
+            right++;
+            while (right - left >= p.length()) {
+                if (valid == 0) {
+                    ans.add(left);
+                }
+                if (need[sCharArray[left] - 'a'] != 0) {
+                    if (window[sCharArray[left] - 'a'] == need[sCharArray[left] - 'a']) {
+                        valid++;
+                    }
+                    window[sCharArray[left] - 'a']--;
+                }
+                left++;
+            }
+        }
+        return ans;
+    }
+
+    // 560. 和为 K 的子数组
+    public int subarraySum(int[] nums, int k) {
+        int ans = 0;
+        int sum = Arrays.stream(nums).sum();
+        int[] pre = new int[nums.length + 1];
+        int[] end = new int[nums.length + 1];
+        for (int i = 0; i < nums.length; i++) {
+            pre[i + 1] = pre[i] + nums[i];
+        }
+        for (int i = nums.length - 1; i >= 0; i--) {
+            end[i] = end[i + 1] + nums[i];
+        }
+        for (int i = 0; i < nums.length + 1; i++) {
+            for (int j = i + 1; j < nums.length + 1; j++) {
+                if (pre[i] + end[j] == sum - k) {
+                    ans++;
+                }
+            }
+        }
+        return ans;
+    }
+
+    // 239. 滑动窗口最大值 todo 1
+    public int[] maxSlidingWindow(int[] nums, int k) {
+        int[] ans = new int[nums.length - k + 1];
+        Deque<Integer> deque = new LinkedList<>();
+        for (int i = 0; i < nums.length; i++) {
+            while (!deque.isEmpty() && nums[i] > nums[deque.getLast()]) {
+                deque.removeLast();
+            }
+            deque.addLast(i);
+            while (i - deque.getFirst() >= k) {
+                deque.removeFirst();
+            }
+            if (i >= k - 1) {
+                ans[i - k + 1] = nums[deque.getFirst()];
+            }
+        }
+        return ans;
+    }
+
+    // 76. 最小覆盖子串 todo 1
+    public String minWindow(String s, String t) {
+        String ans = "";
+        char[] sCharArray = s.toCharArray();
+        char[] tCharArray = t.toCharArray();
+        int[] need = new int[128];
+        int[] window = new int[128];
+        for (char c : tCharArray) {
+            need[c]++;
+        }
+        int valid = 0;
+        for (int i : need) {
+            if (i != 0) {
+                valid++;
+            }
+        }
+        int left = 0, right = 0;
+        while (right < sCharArray.length) {
+            if (need[sCharArray[right]] != 0) {
+                window[sCharArray[right]]++;
+                if (window[sCharArray[right]] == need[sCharArray[right]]) {
+                    valid--;
+                }
+            }
+            right++;
+            while (valid == 0) {
+                if (ans.isEmpty() || ans.length() > right - left) {
+                    ans = s.substring(left, right);
+                }
+
+                if(need[sCharArray[left]] != 0) {
+                    if (window[sCharArray[left]] == need[sCharArray[left]]) {
+                        valid++;
+                    }
+                    window[sCharArray[left]]--;
+                }
+                left++;
+            }
+        }
+        return ans;
     }
 }
