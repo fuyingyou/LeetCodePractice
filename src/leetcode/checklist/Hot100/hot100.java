@@ -2,6 +2,15 @@ package leetcode.checklist.Hot100;
 
 import java.util.*;
 
+class ListNode {
+    int val;
+    ListNode next;
+    ListNode(int x) {
+        val = x;
+        next = null;
+    }
+}
+
 public class hot100 {
 
     // 1. 两数之和
@@ -290,7 +299,7 @@ public class hot100 {
                     ans = s.substring(left, right);
                 }
 
-                if(need[sCharArray[left]] != 0) {
+                if (need[sCharArray[left]] != 0) {
                     if (window[sCharArray[left]] == need[sCharArray[left]]) {
                         valid++;
                     }
@@ -397,9 +406,138 @@ public class hot100 {
         }
         return nums.length + 1;
     }
+
     private void swap(int[] nums, int i, int j) {
         int temp = nums[i];
         nums[i] = nums[j];
         nums[j] = temp;
+    }
+
+    // 73. 矩阵置零
+    public void setZeroes(int[][] matrix) {
+        boolean[] row = new boolean[matrix.length];
+        boolean[] col = new boolean[matrix[0].length];
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[i].length; j++) {
+                if (matrix[i][j] == 0) {
+                    row[i] = true;
+                    col[j] = true;
+                }
+            }
+        }
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[i].length; j++) {
+                if (row[i] || col[j]) {
+                    matrix[i][j] = 0;
+                }
+            }
+        }
+    }
+
+    // 54. 螺旋矩阵
+    public List<Integer> spiralOrder(int[][] matrix) {
+        int m = matrix.length;
+        int n = matrix[0].length;
+        int top = 0, bottom = m - 1, left = 0, right = n - 1;
+        List<Integer> res = new ArrayList<>();
+        while (left <= right && top <= bottom) {
+            for (int i = left; i <= right; i++) {
+                res.add(matrix[top][i]);
+            }
+            top++;
+            if (top > bottom) {
+                break;
+            }
+            for (int i = top; i <= bottom; i++) {
+                res.add(matrix[i][right]);
+            }
+            right--;
+            if (right < left) {
+                break;
+            }
+            for (int i = right; i >= left; i--) {
+                res.add(matrix[bottom][i]);
+            }
+            bottom--;
+            if (bottom < top) {
+                break;
+            }
+            for (int i = bottom; i >= top; i--) {
+                res.add(matrix[i][left]);
+            }
+            left++;
+        }
+        return res;
+    }
+
+    // 48. 旋转图像
+    public void rotate(int[][] matrix) {
+        int n = matrix.length;
+        for (int i = 0; i < n; i++) {
+            for (int j = i; j < n; j++) {
+                int temp = matrix[i][j];
+                matrix[i][j] = matrix[j][i];
+                matrix[j][i] = temp;
+            }
+        }
+        for (int i = 0; i < n; i++) {
+            int left = 0;
+            int right = n - 1;
+            while (left < right) {
+                int temp = matrix[i][left];
+                matrix[i][left] = matrix[i][right];
+                matrix[i][right] = temp;
+                left++;
+                right--;
+            }
+        }
+    }
+
+    // 240. 搜索二维矩阵 II
+    public boolean searchMatrix(int[][] matrix, int target) {
+        int m = matrix.length;
+        int n = matrix[0].length;
+        int row = 0, col = 0;
+        while (col < n && matrix[row][col] < target) {
+            col++;
+        }
+        if (col == n) {
+            col--;
+        }
+        while (row < m && col >= 0) {
+            if (matrix[row][col] == target) {
+                return true;
+            }
+            if (matrix[row][col] < target) {
+                row++;
+            } else {
+                col--;
+            }
+        }
+        return false;
+    }
+
+    // 160. 相交链表
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        ListNode p1 = headA;
+        ListNode p2 = headB;
+        while (p1 != p2) {
+            p1 = p1 != null ? p1.next : headB;
+            p2 = p2 != null ? p2.next : headA;
+        }
+        return p1;
+    }
+
+    // 206. 反转链表
+    public ListNode reverseList(ListNode head) {
+        ListNode prev = new ListNode(0);
+        prev.next = null;
+        while (head != null) {
+            ListNode temp = head.next;
+            head.next = prev.next;
+            prev.next = head;
+            head = temp;
+        }
+        return prev.next;
     }
 }
