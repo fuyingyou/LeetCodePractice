@@ -1,13 +1,21 @@
 package leetcode.checklist.Hot100;
 
+import leetcode.DFS和BFS.BFS.迷宫中离入口最近的出口;
+
 import java.util.*;
 
 class ListNode {
     int val;
     ListNode next;
+
     ListNode(int x) {
         val = x;
         next = null;
+    }
+
+    ListNode(int val, ListNode next) {
+        this.val = val;
+        this.next = next;
     }
 }
 
@@ -539,5 +547,256 @@ public class hot100 {
             head = temp;
         }
         return prev.next;
+    }
+
+    // 234. 回文链表
+    public boolean isPalindrome(ListNode head) {
+        int cnt = 0;
+        ListNode cur = head;
+        while (cur != null) {
+            cnt++;
+            cur = cur.next;
+        }
+        cur = head;
+        for (int i = 0; i < (cnt - 1) / 2; i++) {
+            cur = cur.next;
+        }
+        cur.next = reverse(cur.next);
+        cur = cur.next;
+        ListNode pre = head;
+        while (pre != null && cur != null) {
+            if (pre.val != cur.val) {
+                return false;
+            }
+            pre = pre.next;
+            cur = cur.next;
+        }
+        return true;
+    }
+
+    private ListNode reverse(ListNode head) {
+        ListNode pre = null;
+        ListNode cur = head;
+        while (cur != null) {
+            ListNode next = cur.next;
+            cur.next = pre;
+            pre = cur;
+            cur = next;
+        }
+        return pre;
+    }
+
+    // 141. 环形链表
+    public boolean hasCycle(ListNode head) {
+        ListNode slow = head;
+        ListNode fast = head;
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+            if (slow == fast) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    // 142. 环形链表 II
+    public ListNode detectCycle(ListNode head) {
+        ListNode slow = head;
+        ListNode fast = head;
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+            if (slow == fast) {
+                break;
+            }
+        }
+        if (fast == null || fast.next == null) {
+            return null;
+        }
+        fast = head;
+        while (fast != slow) {
+            fast = fast.next;
+            slow = slow.next;
+        }
+        return fast;
+    }
+
+    // 21. 合并两个有序链表
+    public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
+        ListNode dummy = new ListNode(0);
+        ListNode cur = dummy;
+        while (list1 != null && list2 != null) {
+            if (list1.val < list2.val) {
+                cur.next = list1;
+                cur = cur.next;
+                list1 = list1.next;
+            } else {
+                cur.next = list2;
+                list2 = list2.next;
+            }
+        }
+        if (list1 != null) {
+            cur.next = list1;
+        }
+        if (list2 != null) {
+            cur.next = list2;
+        }
+        return dummy.next;
+    }
+
+    // 2. 两数相加
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        int temp = 0;
+        ListNode dummy = new ListNode(0);
+        ListNode cur = dummy;
+        while (l1 != null && l2 != null) {
+            int x = l1.val + l2.val + temp;
+            cur.next = new ListNode(x % 10);
+            cur = cur.next;
+            l1 = l1.next;
+            l2 = l2.next;
+            temp = x / 10;
+        }
+        while (l1 != null) {
+            int x = l1.val + temp;
+            cur.next = new ListNode(x % 10);
+            cur = cur.next;
+            l1 = l1.next;
+            temp = x / 10;
+        }
+
+        while (l2 != null) {
+            int x = l2.val + temp;
+            cur.next = new ListNode(x % 10);
+            cur = cur.next;
+            l2 = l2.next;
+            temp = x / 10;
+        }
+        if (temp != 0) {
+            cur.next = new ListNode(temp);
+        }
+        return dummy.next;
+    }
+
+    // 19. 删除链表的倒数第 N 个结点
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        ListNode dummy = new ListNode(0);
+        dummy.next = head;
+        ListNode slow = dummy;
+        ListNode fast = dummy;
+        for (int i = 0; i <= n; i++) {
+            fast = fast.next;
+        }
+        while (fast != null) {
+            fast = fast.next;
+            slow = slow.next;
+        }
+        slow.next = slow.next.next;
+        return dummy.next;
+    }
+
+    // 24. 两两交换链表中的节点
+    public ListNode swapPairs(ListNode head) {
+        int cnt = 0;
+        ListNode temp = head;
+        while (temp != null) {
+            cnt++;
+            temp = temp.next;
+        }
+        ListNode dummy = new ListNode(0, head);
+        ListNode p0 = dummy;
+        ListNode pre = null;
+        ListNode cur = dummy.next;
+        while (cnt >= 2) {
+            cnt -= 2;
+            for (int i = 0; i < 2; i++) {
+                ListNode next = cur.next;
+                cur.next = pre;
+                pre = cur;
+                cur = next;
+            }
+            ListNode next = p0.next;
+            p0.next.next = cur;
+            p0.next = pre;
+            p0 = next;
+        }
+
+        return dummy.next;
+    }
+
+    // 25. K 个一组翻转链表
+    public ListNode reverseKGroup(ListNode head, int k) {
+        ListNode dummy = new ListNode(0, head);
+        ListNode temp = dummy.next;
+        int cnt = 0;
+        while (temp != null) {
+            cnt++;
+            temp = temp.next;
+        }
+        ListNode pre = null;
+        ListNode cur = dummy.next;
+        ListNode p0 = dummy;
+        while (cnt >= k) {
+            cnt -= k;
+            for (int i = 0; i < k; i++) {
+                ListNode next = cur.next;
+                cur.next = pre;
+                pre = cur;
+                cur = next;
+            }
+
+            ListNode next = p0.next;
+            p0.next.next = cur;
+            p0.next = pre;
+            p0 = next;
+        }
+
+        return dummy.next;
+    }
+
+    // 70. 爬楼梯
+    public int climbStairs(int n) {
+        if (n == 1) {
+            return 1;
+        }
+        if (n == 2) {
+            return 2;
+        }
+        int f1 = 1, f2 = 2, ans = 0;
+        for (int i = 3; i <= n; i++) {
+            ans = f1 + f2;
+            ;
+            f1 = f2;
+            f2 = ans;
+        }
+        return ans;
+    }
+
+    // 118. 杨辉三角
+    public List<List<Integer>> generate(int numRows) {
+        List<List<Integer>> res = new ArrayList<>();
+        for (int i = 1; i <= numRows; i++) {
+            List<Integer> temp = new ArrayList<>();
+            temp.add(1);
+            for (int j = 1; j < i - 1; j++) {
+                temp.add(res.get(res.size() - 1).get(j - 1) + res.get(res.size() - 1).get(j));
+            }
+            if (i > 1) {
+                temp.add(1);
+            }
+            res.add(temp);
+        }
+        return res;
+    }
+
+
+    // 198. 打家劫舍 todo 1
+    public int rob(int[] nums) {
+        int[] dp = new int[nums.length + 2];
+        for (int i = 0; i < nums.length; i++) {
+            dp[i + 2] = Math.max(dp[i] + nums[i], dp[i + 1]);
+        }
+        return dp[nums.length + 1];
     }
 }
