@@ -19,6 +19,19 @@ class ListNode {
     }
 }
 
+class TreeNode {
+  int val;
+  TreeNode left;
+  TreeNode right;
+  TreeNode() {}
+  TreeNode(int val) { this.val = val; }
+  TreeNode(int val, TreeNode left, TreeNode right) {
+      this.val = val;
+      this.left = left;
+      this.right = right;
+  }
+}
+
 public class hot100 {
 
     // 1. 两数之和
@@ -725,7 +738,7 @@ public class hot100 {
         return dummy.next;
     }
 
-    // 25. K 个一组翻转链表
+    // 25. K 个一组翻转链表 todo 1
     public ListNode reverseKGroup(ListNode head, int k) {
         ListNode dummy = new ListNode(0, head);
         ListNode temp = dummy.next;
@@ -753,6 +766,190 @@ public class hot100 {
         }
 
         return dummy.next;
+    }
+
+    // 94. 二叉树的中序遍历
+    public List<Integer> inorderTraversal(TreeNode root) {
+        List<Integer> ans = new ArrayList<>();
+        if (root == null) {
+            return ans;
+        }
+        dfs(ans, root);
+        return ans;
+    }
+
+    private void dfs(List<Integer> list, TreeNode root) {
+        if (root != null) {
+            dfs(list, root.left);
+            list.add(root.val);
+            dfs(list, root.right);
+        }
+    }
+
+    // 104. 二叉树的最大深度
+    public int maxDepth(TreeNode root) {
+        int mx = 0;
+        if (root == null) {
+            return mx;
+        }
+        Deque<TreeNode> deque = new ArrayDeque<>();
+        deque.add(root);
+        int level = 1;
+        mx = level;
+        while (!deque.isEmpty()) {
+            Deque<TreeNode> tempDeque = new ArrayDeque<>();
+            int size = deque.size();
+            for (int i = 0; i < size; i++) {
+                TreeNode node = deque.pollFirst();
+                if (node.left != null) {
+                    tempDeque.addLast(node.left);
+                }
+                if (node.right != null) {
+                    tempDeque.addLast(node.right);
+                }
+            }
+            deque.addAll(tempDeque);
+            if (!deque.isEmpty()) {
+                level++;
+                mx = Math.max(mx, level);
+            }
+        }
+        return mx;
+    }
+
+    // 226. 翻转二叉树
+    public TreeNode invertTree(TreeNode root) {
+        if (root == null) {
+            return null;
+        }
+
+        TreeNode left = invertTree(root.left);
+        TreeNode right = invertTree(root.right);
+        root.left = right;
+        root.right = left;
+        return root;
+    }
+
+    // 101. 对称二叉树
+    public boolean isSymmetric(TreeNode root) {
+        if (root == null) {
+            return true;
+        }
+        return isSymmetric(root.left, root.right);
+    }
+
+    private boolean isSymmetric (TreeNode left, TreeNode right) {
+        if (left == null && right == null) {
+            return true;
+        }
+        if (left == null || right == null) {
+            return false;
+        }
+        return left.val == right.val && isSymmetric(left.right, right.left) && isSymmetric(left.left, right.right);
+    }
+
+    // 543. 二叉树的直径
+    private int mx = 0;
+    public int diameterOfBinaryTree(TreeNode root) {
+        dfs(root);
+        return mx;
+    }
+
+    private int dfs(TreeNode root) {
+        if (root == null) {
+            return -1;
+        }
+        int left = dfs(root.left) + 1;
+        int right = dfs(root.right) + 1;
+        mx = Math.max(mx, left + right);
+        return Math.max(left, right);
+    }
+
+    // 102. 二叉树的层序遍历
+    public List<List<Integer>> levelOrder(TreeNode root) {
+        List<List<Integer>> res = new ArrayList<>();
+        if (root == null) {
+            return res;
+        }
+
+        Deque<TreeNode> deque = new ArrayDeque<>();
+        deque.add(root);
+        while (!deque.isEmpty()) {
+            int size = deque.size();
+            List<Integer> list = new ArrayList<>();
+            for (int i = 0; i < size; i++) {
+                TreeNode node = deque.poll();
+                list.add(node.val);
+                if (node.left != null) {
+                    deque.add(node.left);
+                }
+                if (node.right != null) {
+                    deque.add(node.right);
+                }
+            }
+            res.add(list);
+        }
+        return res;
+    }
+
+    // 108. 将有序数组转换为二叉搜索树 todo
+
+    // 199. 二叉树的右视图
+    public List<Integer> rightSideView(TreeNode root) {
+//        List<Integer> res = new ArrayList<>();
+//        if (root == null) {
+//            return res;
+//        }
+//        Deque<TreeNode> deque = new ArrayDeque<>();
+//        deque.add(root);
+//        while (!deque.isEmpty()) {
+//            int size = deque.size();
+//            List<Integer> list = new ArrayList<>();
+//            for (int i = 0; i < size; i++) {
+//                TreeNode node = deque.poll();
+//                list.add(node.val);
+//                if (node.left != null) {
+//                    deque.add(node.left);
+//                }
+//                if (node.right != null) {
+//                    deque.add(node.right);
+//                }
+//            }
+//            res.add(list.get(list.size() - 1));
+//        }
+//        return res;
+        List<Integer> res = new ArrayList<>();
+        if (root == null) {
+            return res;
+        }
+        res.add(root.val);
+        dfs(root.right, 1, res);
+        dfs(root.left, 1, res);
+        return res;
+    }
+
+    private void dfs(TreeNode root, int depth, List<Integer> res) {
+        if (root == null) {
+            return;
+        }
+        if (res.size() == depth) {
+            res.add(root.val);
+        }
+        dfs(root.right, depth + 1, res);
+        dfs(root.left, depth + 1, res);
+    }
+
+    // 236. 二叉树的最近公共祖先
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        if (root == null || root == p || root == q) {
+            return root;
+        }
+        TreeNode left = lowestCommonAncestor(root.left, p, q);
+        TreeNode right = lowestCommonAncestor(root.right, p, q);
+        if (left != null && right != null) {
+            return root;
+        }
+        return left != null ? left : right;
     }
 
     // 70. 爬楼梯
