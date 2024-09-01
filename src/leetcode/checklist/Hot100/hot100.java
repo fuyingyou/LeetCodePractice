@@ -3,6 +3,8 @@ package leetcode.checklist.Hot100;
 import leetcode.DFS和BFS.BFS.迷宫中离入口最近的出口;
 
 import java.util.*;
+import java.util.concurrent.locks.AbstractQueuedSynchronizer;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 class ListNode {
     int val;
@@ -996,4 +998,63 @@ public class hot100 {
         }
         return dp[nums.length + 1];
     }
+    public void test() {
+        ReentrantReadWriteLock reentrantReadWriteLock = new ReentrantReadWriteLock();
+        AbstractQueuedSynchronizer abstractQueuedSynchronizer = null;
+    }
+
+    /**
+     * 回溯
+     */
+
+    // 46. 全排列
+
+    // 78. 子集
+    public List<List<Integer>> subsets(int[] nums) {
+        List<List<Integer>> ans = new ArrayList<>();
+        for (int i = 0; i < (1 << nums.length); i++) {
+            List<Integer> sub = new ArrayList<>();
+            for (int j = 0; j < nums.length; j++) {
+                if (((i >> j) & 1) == 1) {
+                    sub.add(nums[j]);
+                }
+            }
+            ans.add(sub);
+        }
+        return ans;
+    }
+
+    // 17. 电话号码的字母组合
+    public List<String> letterCombinations(String digits) {
+        String[] dic = new String[]{"abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
+        List<String> ans = new ArrayList<>();
+        int n = digits.length();
+        if (n < 1) {
+            return ans;
+        }
+        char[] path = new char[n];
+        dfs(0, path, digits, dic, ans);
+        return ans;
+    }
+
+    private void dfs(int i, char[] path, String digits, String[] dic, List<String> ans) {
+        if (i == digits.length()) {
+            StringBuilder sb = new StringBuilder();
+            for (int j = 0; j < path.length; j++) {
+                sb.append(path[j]);
+            }
+            ans.add(sb.toString());
+            return;
+        }
+        char[] chs = dic[digits.charAt(i) - '2'].toCharArray();
+        for (char ch : chs) {
+            path[i] = ch;
+            dfs(i + 1, path, digits, dic, ans);
+        }
+    }
+
+    // 39. 组合总和
+
+
+
 }
