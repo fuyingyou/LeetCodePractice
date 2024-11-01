@@ -2,7 +2,7 @@ package leetcode.contest;
 
 import java.util.*;
 
-public class week {
+public class weeks142 {
     public int possibleStringCount(String word) {
         char[] charArray = word.toCharArray();
         int sum = 0;
@@ -17,6 +17,8 @@ public class week {
         }
         return cnt + sum;
     }
+
+    // todo 超时 尝试前缀和之类方法优化
 
     public int possibleStringCount(String word, int k) {
         int mod = (int) (1e9 + 7);
