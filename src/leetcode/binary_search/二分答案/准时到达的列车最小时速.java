@@ -1,4 +1,4 @@
-package leetcode.二分.二分答案;
+package leetcode.binary_search.二分答案;
 
 public class 准时到达的列车最小时速 {
     public int minSpeedOnTime(int[] dist, double hour) {

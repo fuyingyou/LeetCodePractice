@@ -1,4 +1,4 @@
-package leetcode.二分.最小化最大值;
+package leetcode.binary_search.最小化最大值;
 
 public class 袋子里最少数目的球 {
     public int minimumSize(int[] nums, int maxOperations) {

@@ -1,4 +1,4 @@
-package leetcode.二分.最小化最大值;
+package leetcode.binary_search.最小化最大值;
 
 public class 最小化数组中的最大值 {
     public int minimizeArrayValue(int[] nums) {

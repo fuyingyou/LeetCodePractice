@@ -1,4 +1,4 @@
-package leetcode.二分.二分答案;
+package leetcode.binary_search.二分答案;
 
 public class 使结果不超过阈值的最小除数 {
     public int smallestDivisor(int[] nums, int threshold) {

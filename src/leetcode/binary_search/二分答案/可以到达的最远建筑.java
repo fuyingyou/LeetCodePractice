@@ -1,4 +1,4 @@
-package leetcode.二分.二分答案;
+package leetcode.binary_search.二分答案;
 
 import java.util.PriorityQueue;
 

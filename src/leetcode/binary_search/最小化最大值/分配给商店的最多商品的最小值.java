@@ -1,4 +1,4 @@
-package leetcode.二分.最小化最大值;
+package leetcode.binary_search.最小化最大值;
 
 public class 分配给商店的最多商品的最小值 {
     public int minimizedMaximum(int n, int[] quantities) {
