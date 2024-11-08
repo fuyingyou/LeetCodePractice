@@ -20,7 +20,6 @@ public class PrintAB3 {
                 }
             }
         });
-
         Thread threadB = new Thread(new Runnable() {
             @Override
             public void run() {
