@@ -145,7 +145,7 @@ public class hot100 {
         return mx;
     }
 
-    // 15. 三数之和
+    // 15. LC15
     public List<List<Integer>> threeSum(int[] nums) {
         Arrays.sort(nums);
         List<List<Integer>> res = new ArrayList<>();
