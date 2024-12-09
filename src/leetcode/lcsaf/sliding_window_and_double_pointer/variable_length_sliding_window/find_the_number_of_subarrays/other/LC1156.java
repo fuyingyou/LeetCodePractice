@@ -1,4 +1,4 @@
-package leetcode.lcsaf.sliding_window_and_double_pointer.variable_length_sliding_window.find_the_number_of_subarrays.just_legal;
+package leetcode.lcsaf.sliding_window_and_double_pointer.variable_length_sliding_window.find_the_number_of_subarrays.other;
 
 public class LC1156 {
     /**
