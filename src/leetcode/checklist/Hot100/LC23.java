@@ -2,12 +2,10 @@ package leetcode.checklist.Hot100;
 
 import leetcode.common.ListNode;
 
-import java.util.Arrays;
 import java.util.Comparator;
-import java.util.List;
 import java.util.PriorityQueue;
 
-public class 合并K个升序链表 {
+public class LC23 {
     public ListNode mergeKLists(ListNode[] lists) {
         PriorityQueue<ListNode> pq = new PriorityQueue<>(Comparator.comparingInt(a -> a.val));
         for (ListNode node : lists) {

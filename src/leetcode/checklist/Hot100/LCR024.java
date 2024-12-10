@@ -2,9 +2,7 @@ package leetcode.checklist.Hot100;
 
 import leetcode.common.ListNode;
 
-import java.util.List;
-
-public class 翻转链表 {
+public class LCR024 {
     // 反转链表
     public ListNode reverseList(ListNode head) {
         ListNode pre = null;

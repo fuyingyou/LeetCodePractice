@@ -5,7 +5,7 @@ import leetcode.common.TreeNode;
 import java.util.Deque;
 import java.util.LinkedList;
 
-public class 翻转二叉树 {
+public class LC226 {
     public TreeNode invertTree(TreeNode root) {
         if (root == null) {
             return null;

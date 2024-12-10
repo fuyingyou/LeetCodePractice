@@ -2,7 +2,7 @@ package leetcode.checklist.Hot100;
 
 import leetcode.common.TreeNode;
 
-public class 将有序数组转换为二叉搜索树 {
+public class LC108 {
     public TreeNode sortedArrayToBST(int[] nums) {
         return dfs(nums, 0, nums.length - 1);
     }

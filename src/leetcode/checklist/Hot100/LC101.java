@@ -2,7 +2,7 @@ package leetcode.checklist.Hot100;
 
 import leetcode.common.TreeNode;
 
-public class 对称二叉树 {
+public class LC101 {
     public boolean isSymmetric(TreeNode root) {
         if (root == null || root.left == null && root.right == null) {
             return true;

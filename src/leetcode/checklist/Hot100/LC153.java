@@ -1,6 +1,6 @@
 package leetcode.checklist.Hot100;
 
-public class 寻找旋转排序数组中的最小值 {
+public class LC153 {
     public int findMin(int[] nums) {
         int n = nums.length;
         if (nums[0] <= nums[n-1]) {

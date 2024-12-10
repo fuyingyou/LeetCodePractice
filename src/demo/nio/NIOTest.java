@@ -1,11 +1,6 @@
-package test.nio;
+package demo.nio;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.RandomAccessFile;
-import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
-import java.nio.channels.FileChannel;
 
 public class NIOTest {
     public static void main(String[] args) {

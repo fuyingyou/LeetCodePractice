@@ -2,7 +2,7 @@ package leetcode.checklist.Hot100;
 
 import java.util.HashMap;
 
-public class 两数之和 {
+public class LC1 {
     public int[] twoSum(int[] nums, int target) {
         int n = nums.length;
         int[] ans = new int[2];

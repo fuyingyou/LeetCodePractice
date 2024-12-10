@@ -1,6 +1,6 @@
 package leetcode.checklist.Hot100;
 
-public class 搜索二维矩阵 {
+public class LC74 {
     public boolean searchMatrix(int[][] matrix, int target) {
         int n = matrix.length;
         int m = matrix[0].length;

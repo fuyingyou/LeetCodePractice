@@ -1,6 +1,6 @@
 package leetcode.checklist.Hot100;
 
-public class 搜索旋转排序数组 {
+public class LC33 {
     public int search(int[] nums, int target) {
         int n = nums.length;
         int left = -1, right = n;

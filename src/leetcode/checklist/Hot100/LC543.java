@@ -2,7 +2,7 @@ package leetcode.checklist.Hot100;
 
 import leetcode.common.TreeNode;
 
-public class 二叉树的直径 {
+public class LC543 {
 
     private int ans = 0;
     public int diameterOfBinaryTree(TreeNode root) {

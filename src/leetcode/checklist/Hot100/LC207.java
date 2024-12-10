@@ -2,7 +2,7 @@ package leetcode.checklist.Hot100;
 
 import java.util.*;
 
-public class 课程表 {
+public class LC207 {
     public boolean canFinish(int numCourses, int[][] prerequisites) {
         int[] degree = new int[numCourses];
         HashMap<Integer, List<Integer>> map = new HashMap<>();

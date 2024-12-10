@@ -1,14 +1,13 @@
 package leetcode.checklist.Hot100;
 
 import leetcode.common.ListNode;
-import leetcode.common.Node;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-public class 排序链表 {
+public class LC148 {
     public ListNode sortList(ListNode head) {
         List<ListNode> list = new ArrayList<>();
         ListNode cur = head;

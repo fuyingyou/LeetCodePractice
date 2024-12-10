@@ -1,4 +1,4 @@
-package test.juc;
+package demo.juc;
 
 public class PrintAB {
 

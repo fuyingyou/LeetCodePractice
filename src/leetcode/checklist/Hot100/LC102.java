@@ -4,7 +4,7 @@ import leetcode.common.TreeNode;
 
 import java.util.*;
 
-public class 二叉树的层序遍历 {
+public class LC102 {
     public List<List<Integer>> levelOrder(TreeNode root) {
         List<List<Integer>> ans = new ArrayList<>();
         if (root == null) {

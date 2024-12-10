@@ -1,6 +1,6 @@
 package leetcode.checklist.Hot100;
 
-public class 跳跃游戏2 {
+public class LC45 {
     public int jump(int[] nums) {
         int n = nums.length;
         int end = 0;

@@ -7,7 +7,7 @@ import java.util.Deque;
 import java.util.LinkedList;
 import java.util.List;
 
-public class 二叉树的中序遍历 {
+public class LC94 {
 
  /*   public List<Integer> inorderTraversal(TreeNode root) {
         List<Integer> ans = new ArrayList<>();

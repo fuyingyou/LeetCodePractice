@@ -1,4 +1,4 @@
-package test;
+package demo;
 
 import java.util.*;
 
@@ -23,7 +23,7 @@ public class Test {
 //        }
 
         List<String> list = new ArrayList<>();
-        list.add("test");
+        list.add("demo");
         list.add("apple");
         list.add("red");
         list.add("ten");

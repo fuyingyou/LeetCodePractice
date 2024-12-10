@@ -2,10 +2,7 @@ package leetcode.checklist.Hot100;
 
 import leetcode.common.TreeNode;
 
-import java.util.Deque;
-import java.util.LinkedList;
-
-public class 二叉树的最大深度 {
+public class LC104 {
 
     /*int ans = 0;
     public int maxDepth(TreeNode root) {

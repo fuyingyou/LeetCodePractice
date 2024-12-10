@@ -2,7 +2,7 @@ package leetcode.checklist.Hot100;
 
 import leetcode.common.TreeNode;
 
-public class 验证二叉搜索树 {
+public class LC98 {
    /* public boolean isValidBST(TreeNode root) {
         return dfs(root, Long.MIN_VALUE, Long.MAX_VALUE);
     }

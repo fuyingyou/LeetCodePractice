@@ -4,7 +4,7 @@ import leetcode.common.Node;
 
 import java.util.HashMap;
 
-public class 随机链表的复制 {
+public class LC138 {
     public Node copyRandomList(Node head) {
         Node cur = head;
         HashMap<Node, Node> map = new HashMap<>();

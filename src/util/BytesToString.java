@@ -5,7 +5,7 @@ import java.util.Arrays;
 
 public class BytesToString {
     public static void main(String[] args) {
-        String str = "test";
+        String str = "demo";
 
         // string to byte[] 使用平台默认字符集
         byte[] bytes = str.getBytes();

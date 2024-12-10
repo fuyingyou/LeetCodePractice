@@ -1,8 +1,7 @@
-package test.nio;
+package demo.nio;
 
 import java.io.RandomAccessFile;
 import java.nio.ByteBuffer;
-import java.nio.CharBuffer;
 import java.nio.channels.FileChannel;
 
 public class ChannelTest {
