@@ -1,4 +1,4 @@
-package leetcode.lcsaf.sliding_window_and_double_pointer.two_pointer_single_sequence.two_pointer_local_modify;
+package leetcode.lcsaf.sliding_window_and_double_pointer.two_pointer_one_sequence.two_pointer_local_modify;
 
 public class LC80 {
     /**
